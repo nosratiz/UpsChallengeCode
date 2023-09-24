@@ -1,3 +1,6 @@
+using System.Linq;
+using System.Net.Http;
+
 namespace UPS.Common.Utility;
 
 public static class Utils

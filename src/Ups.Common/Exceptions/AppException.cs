@@ -1,3 +1,5 @@
+using System;
+
 namespace UPS.Common.Exceptions;
 
 public class AppException : Exception

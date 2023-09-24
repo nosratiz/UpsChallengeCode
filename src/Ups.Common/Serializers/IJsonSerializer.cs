@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace UPS.Common.Serializers;
 
 public interface IJsonSerializer
