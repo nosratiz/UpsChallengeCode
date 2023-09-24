@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UPS.Application.Core.Contracts.Responses;
 
 namespace UPS.Application.Core;
