@@ -83,7 +83,7 @@ namespace Ups.App
             {
                 await _mediator.Send(new DeleteUserCommand(userId));
 
-                MessageBox.Show("User added successfully");
+                MessageBox.Show("User Delete successfully");
 
                 await LoadDataAsync();
             }
@@ -195,6 +195,11 @@ namespace Ups.App
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
             AddPopup.IsOpen = true;
+        }
+
+        private void CancelAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddPopup.IsOpen = false;
         }
     }
 }

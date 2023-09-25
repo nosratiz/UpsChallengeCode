@@ -25,6 +25,8 @@ public static class ConfigureServices
         services.AddValidatorsFromAssemblyContaining(typeof(IUserService));
         services.Configure<UpsApiService>(configuration.GetSection("UpsApiService"));
 
+      
+
         var upsApiService = new UpsApiService();
         configuration.Bind(nameof(UpsApiService), upsApiService);
 
@@ -42,7 +44,7 @@ public static class ConfigureServices
                     
                     c.DefaultRequestHeaders.Add(
                         "Authorization",
-                        $"Bearer {upsApiService.ApiKey}"
+                        $"Bearer {configuration["UpsApiService:ApiKey"]}"
                     );
                 }
             )

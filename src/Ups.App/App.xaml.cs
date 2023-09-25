@@ -17,7 +17,10 @@ public partial class App : Application
     {
         Config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
+            .AddUserSecrets<App>() 
             .Build();
+
+    
 
 
         AppHost = Host.CreateDefaultBuilder().ConfigureServices(((context, services) =>
@@ -25,8 +28,10 @@ public partial class App : Application
             services.AddSingleton<MainWindow>();
             services.AddApplication(Config);
 
-        } )).Build();
-            
+        })).Build();
+
+
+
     }
 
     protected override async void OnStartup(StartupEventArgs e)

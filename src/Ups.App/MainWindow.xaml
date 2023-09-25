@@ -110,8 +110,9 @@
                 <!-- Your editing controls go here -->
                 <StackPanel Margin="10">
                     <TextBlock Text="Add User" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10" Foreground="#2196F3"/>
-
+                    <Label Content="Name" Width="50" VerticalAlignment="Center" Foreground="#2196F3"/>
                     <TextBox x:Name="AddNameTextBox"  Margin="0,0,0,10"/>
+                    <Label Content="Email" Width="50" VerticalAlignment="Bottom"  Foreground="#2196F3"/>
                     <TextBox x:Name="AddEmailTextBox" Margin="0,0,0,10"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -131,7 +132,7 @@
                     </StackPanel>
 
                     <Button Name="addBtn" Content="Save" Click="AddButton_Click"  Background="#2196F3" Foreground="White" HorizontalAlignment="Center"/>
-                    <Button Content="Cancel" Click="CancelEditButton_Click" Background="Gray" Foreground="White" HorizontalAlignment="Center"/>
+                    <Button Content="Cancel" Click="CancelAddButton_Click" Background="Gray" Foreground="White" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Border>
         </Popup>
