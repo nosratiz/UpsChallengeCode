@@ -5,6 +5,7 @@ using UPS.Application.Core;
 using UPS.Application.Core.Contracts.Responses;
 using UPS.Application.Users.Commands.Create;
 using UPS.Application.Users.Commands.Delete;
+using UPS.Application.Users.Commands.Update;
 using UPS.Application.Users.Queries;
 using UPS.Common.Exceptions;
 using Xunit;
@@ -26,7 +27,7 @@ public class UserTest
     {
         _mediator.Setup(x => x.Send(It.IsAny<CreateUserCommand>(),
                 It.IsAny<CancellationToken>()))
-            .ThrowsAsync(new AppException("Invalid data"));
+            .ThrowsAsync(new AppException());
 
         var createUser = UserFakeData.CreateUser(name, email, gender, status);
 
@@ -105,5 +106,28 @@ public class UserTest
         var result = await baseConfiguration.Send(getAllUser);
 
         result.Should().NotBeNull().And.BeOfType<Result<UserPagedListResponse>>().Which.Data.Should().NotBeNull();
-    }   
+    }
+
+
+
+    [Theory]
+    [ClassData(typeof(RegisterValidData))]
+    public async Task WhenEditUser_WithValid_ShouldUpdateSuccessfully(int id, string name, string email, string gender, string status)
+    {
+        _mediator.Setup(x => x.Send(It.IsAny<UpdateUserCommand>(),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(Result<UserResponse>.Ok(new UserResponse{Email = email,Gender = gender,Id = id,Name = name,Status = status}));
+
+
+        var updateUser = UserFakeData.UpdateUser(id,name, email, gender, status);
+
+        var baseConfiguration = new BaseConfiguration(_mediator.Object);
+
+        var result = await baseConfiguration.Send(updateUser);
+
+        result.Should().NotBeNull().And.BeOfType<Result<UserResponse>>().Which.Data.Email!.Contains(email);
+
+    }
+
+
 }
