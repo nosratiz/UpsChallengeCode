@@ -1,0 +1,107 @@
+﻿<Window x:Class="Ups.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="User Management" Height="750" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Background="#2196F3">
+            <TextBlock Text="User Management" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Content -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Input Fields -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20">
+                <Label Content="Name" Width="50" VerticalAlignment="Center" Foreground="#2196F3"/>
+                <TextBox x:Name="NameTextBox" Width="150" VerticalAlignment="Center" Margin="10"/>
+                <Label Content="Email" Width="50" VerticalAlignment="Center" Foreground="#2196F3"/>
+                <TextBox x:Name="EmailTextBox" Width="150" VerticalAlignment="Center" Margin="10"/>
+                <Label Content="Gender" VerticalAlignment="Center" Foreground="#2196F3"/>
+                <ComboBox x:Name="GenderComboBox" Width="100" VerticalAlignment="Center" Margin="10">
+                    <ComboBoxItem Content="Male"/>
+                    <ComboBoxItem Content="Female"/>
+                </ComboBox>
+                <Label Content="Status" VerticalAlignment="Center" Foreground="#2196F3"/>
+                <ComboBox x:Name="StatusComboBox" Width="100" VerticalAlignment="Center" Margin="10">
+                    <ComboBoxItem Content="Active"/>
+                    <ComboBoxItem Content="Inactive"/>
+                </ComboBox>
+                <Button Content="Add" Click="AddButton_Click" Background="#2196F3" Foreground="White" VerticalAlignment="Center" Margin="20"/>
+            </StackPanel>
+
+            <!-- User List -->
+            <ListView Grid.Row="1" Name="DataListView" Margin="20">
+                <ListView.View>
+                    <GridView>
+                        <!-- Define your columns here -->
+                        <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Email" Width="250" DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn Header="Gender" Width="100" DisplayMemberBinding="{Binding Gender}" />
+                        <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}" />
+                        <GridViewColumn Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Edit" Click="EditUser_Click" Tag="{Binding Id}" Background="#2196F3" Foreground="White" Margin="5"/>
+                                        <Button Content="Delete" Click="DeleteUser_Click" Tag="{Binding Id}" Background="Red" Foreground="White" Margin="5"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <!-- Pagination Controls -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="PageInfoTextBlock" Margin="10"/>
+                <Button Content="Prev" Click="PrevButton_Click" Background="#2196F3" Foreground="White" Margin="10"/>
+                <Button Content="Next" Click="NextButton_Click" Background="#2196F3" Foreground="White" Margin="10"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Edit Popup -->
+        <Popup Name="EditPopup" IsOpen="False" Width="400" Height="300" Placement="Center">
+            <Border Background="White" BorderBrush="#2196F3" BorderThickness="2" CornerRadius="5">
+                <!-- Your editing controls go here -->
+                <StackPanel Margin="10">
+                    <TextBlock Text="Edit User" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10" Foreground="#2196F3"/>
+
+                    <TextBox x:Name="EditNameTextBox"  Margin="0,0,0,10"/>
+                    <TextBox x:Name="EditEmailTextBox" Margin="0,0,0,10"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock Text="Gender: " VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <ComboBox x:Name="EditGenderComboBox" Width="120">
+                            <ComboBoxItem Content="Male"/>
+                            <ComboBoxItem Content="Female"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock Text="Status: " VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <ComboBox x:Name="EditStatusComboBox" Width="120">
+                            <ComboBoxItem Content="Active"/>
+                            <ComboBoxItem Content="Inactive"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <Button Name="EditBtn" Content="Save" Click="SaveButton_Click" Tag="{Binding Id}" Background="#2196F3" Foreground="White" HorizontalAlignment="Center"/>
+                    <Button Content="Cancel" Click="CancelEditButton_Click" Background="Gray" Foreground="White" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+    </Grid>
+</Window>

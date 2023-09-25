@@ -28,27 +28,24 @@ public static class ConfigureServices
         services.AddValidatorsFromAssemblyContaining(typeof(IUserService));
         services.Configure<UpsApiService>(configuration.GetSection("UpsApiService"));
 
-        string secretApiKey = configuration["ApiKey"]!;
-
-        var UpsApiService = new UpsApiService();
-        configuration.Bind(nameof(Common.Options.UpsApiService), UpsApiService);
-
-        UpsApiService.ApiKey = secretApiKey;
+        var upsApiService = new UpsApiService();
+        configuration.Bind(nameof(UpsApiService), upsApiService);
 
 
-        services.AddSingleton(UpsApiService);
+
+        services.AddSingleton(upsApiService);
 
         services
             .AddHttpClient(
                 "UpsApiService",
                 c =>
                 {
-                    c.BaseAddress = new Uri(UpsApiService.BaseUrl);
+                    c.BaseAddress = new Uri(upsApiService.BaseUrl);
                     c.Timeout = TimeSpan.FromMinutes(1);
                     
                     c.DefaultRequestHeaders.Add(
                         "Authorization",
-                        $"Bearer {UpsApiService.ApiKey}"
+                        $"Bearer {upsApiService.ApiKey}"
                     );
                 }
             )
