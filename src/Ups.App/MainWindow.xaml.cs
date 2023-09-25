@@ -17,7 +17,7 @@ namespace Ups.App
     public partial class MainWindow : Window
     {
         private readonly IMediator _mediator;
-        private int currentPage=1;
+        private int _currentPage=1;
 
         public MainWindow(IMediator mediator)
         {
@@ -33,7 +33,7 @@ namespace Ups.App
             {
                 var result = await _mediator.Send(new GetUserPagedListQuery
                 {
-                    Page = currentPage
+                    Page = _currentPage
                 });
 
 
@@ -53,15 +53,11 @@ namespace Ups.App
             await LoadDataAsync();
         }
 
-        private async void AddUser_Click(object sender, RoutedEventArgs e)
-        {
-            await LoadDataAsync();
-        }
 
         private async void EditUser_Click(object sender, RoutedEventArgs e)
         {
             Button? deleteButton = sender as Button;
-            int userId = (int)deleteButton.Tag;
+            int userId = (int)deleteButton!.Tag;
             var result=await _mediator.Send(new GetUserQuery(userId));
 
             if(result.Success==false)
@@ -81,7 +77,7 @@ namespace Ups.App
         private async void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
             Button? deleteButton = sender as Button;
-            int userId = (int)deleteButton.Tag;
+            int userId = (int)deleteButton!.Tag;
 
             try
             {
@@ -122,22 +118,22 @@ namespace Ups.App
 
         private async void  PrevButton_Click(object sender, RoutedEventArgs e)
         {
-            if (currentPage <= 1) return;
+            if (_currentPage <= 1) return;
            
-            currentPage--;
+            _currentPage--;
             await LoadDataAsync();
         }
 
         private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            currentPage++;
+            _currentPage++;
             await LoadDataAsync();
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Button? saveButton = sender as Button;
-            int userId = (int)saveButton.Tag;
+            int userId = (int)saveButton!.Tag;
 
             var updateUserCommand = new UpdateUserCommand
             {
