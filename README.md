@@ -36,8 +36,24 @@ I have integrated FluentValidation into My code to separate validation and busin
 
 
 # DI
-If you want to use dependency injection, you might find it useful to use Microsoft's Dependency injections and Host packages.
-This way, each project library can register its own services, making larger apps easier to manage. 
+ I Use two packages for leveraging DI in this app and now we can easlily use DI in our App and for config setting use appsetting.json if we later on we want user IOption pattern in our app
+
+ ````
+   <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+
+     AppHost = Host.CreateDefaultBuilder().ConfigureServices(((context, services) =>
+        {
+            services.AddSingleton<MainWindow>();
+            services.AddApplication(Config);
+
+        } )).Build();
+
+````
+
+
+
+
 
 
 
