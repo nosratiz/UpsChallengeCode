@@ -18,20 +18,27 @@ I'm working on a project that involves three distinct sections: Ups.App for the 
 
 
 
-# Reseliancy
+# Reseliancy and Clean Code
 
-this app is built to withstand unexpected server issues and remain reliable. I've implemented a retry policy using Polly to ensure our users have constant access to the resources they need. If there's ever a disruption in our server, our app will automatically try again until it successfully connects, minimizing downtime for our users. You can always count on our app to be there when you need it.
+This app is built to withstand unexpected server issues and remain reliable. I've implemented a retry policy using Polly to ensure our users have constant access to the resources they need. If there's ever a disruption in our server, our app will automatically try again until it successfully connects, minimizing downtime for our users. You can always count on our app to be there when needed.
 
 
 #MediatR
 
-My codebase now incorporates the CQRS pattern, which has significantly improved clarity and organization. This approach enables me to differentiate between various components and functionalities, leading to a more streamlined and effective codebase.
+My codebase now incorporates the CQRS pattern, significantly improving clarity and organization. This approach lets me differentiate between various components and functionalities, leading to a more streamlined and effective codebase.
 
 
 
 #FluentValidation
 
-I have integrated FluentValidation into My code to separate validation logic from business logic. This not only enhances the readability and maintainability of our code but also enables us to handle validation errors more efficiently and offer improved user feedback. In general, it has been a valuable addition to My development process.
+I have integrated FluentValidation into My code to separate validation and business logic. This enhances the readability and maintainability of our code and enables us to handle validation errors more efficiently and offers improved user feedback. In general, it has been a valuable addition to My development process.
+
+
+
+# DI
+If you want to use dependency injection, you might find it useful to use Microsoft's Dependency injections and Host packages.
+This way, each project library can register its own services, making larger apps easier to manage. 
+
 
 
 
