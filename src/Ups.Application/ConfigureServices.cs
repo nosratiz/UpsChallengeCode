@@ -1,7 +1,6 @@
 using System.Net;
 using System.Reflection;
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -17,8 +16,6 @@ public static class ConfigureServices
     public static IServiceCollection AddApplication(this IServiceCollection services,IConfiguration configuration)
     {      
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
-        services.AddTransient<IMediator, Mediator>();
 
         services.AddTransient<IUserService, UserService>();
 

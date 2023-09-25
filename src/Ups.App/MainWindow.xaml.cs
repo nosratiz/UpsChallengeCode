@@ -99,21 +99,25 @@ namespace Ups.App
         {
             var createUserCommand = new CreateUserCommand
             {
-                Name = NameTextBox.Text,
-                Email = EmailTextBox.Text,
-                Gender = GenderComboBox.Text,
-                Status = StatusComboBox.Text
+                Name = AddNameTextBox.Text,
+                Email = AddEmailTextBox.Text,
+                Gender = AddGenderComboBox.Text,
+                Status = AddStatusComboBox.Text
             };
 
            var result= await _mediator.Send(createUserCommand);
 
-           if(result.Success==false)
+           AddPopup.IsOpen = false;
+
+           if (result.Success==false)
                MessageBox.Show(result.Errors.First().Message);
            else
            {
                MessageBox.Show("User added successfully");
                await LoadDataAsync();
            }
+
+      
         }
 
         private async void  PrevButton_Click(object sender, RoutedEventArgs e)
@@ -161,6 +165,36 @@ namespace Ups.App
             EditPopup.IsOpen = false;
         }
 
-       
+
+        private async void Search_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                var result = await _mediator.Send(new GetUserPagedListQuery
+                {
+                    Page = _currentPage,
+                    Email = EmailTextBox.Text,
+                    Name = NameTextBox.Text,
+                    Gender = GenderComboBox.Text.ToLower(),
+                    Status = StatusComboBox.Text.ToLower()
+                });
+
+
+                // Process and display the data in your UI
+                DataListView.ItemsSource = result.Data.Users;
+                DataListView.DataContext = result.Data.Users;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that might occur during data loading
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+            AddPopup.IsOpen = true;
+        }
     }
 }
