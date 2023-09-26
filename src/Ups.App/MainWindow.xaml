@@ -74,38 +74,39 @@
         </Grid>
 
         <!-- Edit Popup -->
-        <Popup Grid.Row="0" Name="EditPopup" IsOpen="False" Width="400" Height="300" Placement="Center">
+        <Popup Grid.Row="0" Name="EditPopup" IsOpen="False" Width="400" Height="350" Placement="Center">
             <Border Background="White" BorderBrush="#2196F3" BorderThickness="2" CornerRadius="5">
                 <!-- Your editing controls go here -->
                 <StackPanel Margin="10">
                     <TextBlock Text="Edit User" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10" Foreground="#2196F3"/>
-
+                    <Label Content="Name" Width="50" VerticalAlignment="Center" Foreground="#2196F3"/>
                     <TextBox x:Name="EditNameTextBox"  Margin="0,0,0,10"/>
+                    <Label Content="Email" Width="50" VerticalAlignment="Center" Foreground="#2196F3"/>
                     <TextBox x:Name="EditEmailTextBox" Margin="0,0,0,10"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <TextBlock Text="Gender: " VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox x:Name="EditGenderComboBox" Width="120">
+
+                    <Label Content="Gender" Width="50" VerticalAlignment="Bottom"  Foreground="#2196F3"/>
+                    <ComboBox x:Name="EditGenderComboBox"  Margin="0,0,0,10">
                             <ComboBoxItem Content="Male"/>
                             <ComboBoxItem Content="Female"/>
                         </ComboBox>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <TextBlock Text="Status: " VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox x:Name="EditStatusComboBox" Width="120">
+
+                    <Label Content="Status" Width="50" VerticalAlignment="Bottom"  Foreground="#2196F3"/>
+                    <ComboBox x:Name="EditStatusComboBox"  Margin="0,0,0,10">
                             <ComboBoxItem Content="Active"/>
                             <ComboBoxItem Content="Inactive"/>
                         </ComboBox>
-                    </StackPanel>
 
-                    <Button Name="EditBtn" Content="Save" Click="SaveButton_Click" Tag="{Binding Id}" Background="#2196F3" Foreground="White" HorizontalAlignment="Center"/>
-                    <Button Content="Cancel" Click="CancelEditButton_Click" Background="Gray" Foreground="White" HorizontalAlignment="Center"/>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Name="EditBtn" Content="Save" Click="SaveButton_Click" Tag="{Binding Id}" Background="#2196F3" Foreground="White" HorizontalAlignment="Center" Margin="10"/>
+                    <Button Content="Cancel" Click="CancelEditButton_Click" Background="Gray" Foreground="White" HorizontalAlignment="Center" Margin="10"/>
+                        </StackPanel>
                 </StackPanel>
             </Border>
         </Popup>
 
-        <Popup Grid.Row="0" Name="AddPopup" IsOpen="False" Width="400" Height="300" Placement="Center">
+        <Popup Grid.Row="0" Name="AddPopup" IsOpen="False" Width="400" Height="350" Placement="Center">
             <Border Background="White" BorderBrush="#2196F3" BorderThickness="2" CornerRadius="5">
                 <!-- Your editing controls go here -->
                 <StackPanel Margin="10">
@@ -115,24 +116,25 @@
                     <Label Content="Email" Width="50" VerticalAlignment="Bottom"  Foreground="#2196F3"/>
                     <TextBox x:Name="AddEmailTextBox" Margin="0,0,0,10"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <TextBlock Text="Gender: " VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox x:Name="AddGenderComboBox" Width="120">
+
+                    <Label Content="Gender" Width="50" VerticalAlignment="Bottom"  Foreground="#2196F3"/>
+                    <ComboBox x:Name="AddGenderComboBox" Margin="0,0,0,10">
                             <ComboBoxItem Content="Male"/>
                             <ComboBoxItem Content="Female"/>
                         </ComboBox>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <TextBlock Text="Status: " VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox x:Name="AddStatusComboBox" Width="120">
+
+
+                    <Label Content="Status" Width="50" VerticalAlignment="Bottom"  Foreground="#2196F3"/>
+                    <ComboBox x:Name="AddStatusComboBox"  Margin="0,0,0,10">
                             <ComboBoxItem Content="Active"/>
                             <ComboBoxItem Content="Inactive"/>
                         </ComboBox>
-                    </StackPanel>
-
-                    <Button Name="addBtn" Content="Save" Click="AddButton_Click"  Background="#2196F3" Foreground="White" HorizontalAlignment="Center"/>
-                    <Button Content="Cancel" Click="CancelAddButton_Click" Background="Gray" Foreground="White" HorizontalAlignment="Center"/>
+       
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Name="addBtn" Content="Save" Click="AddButton_Click"  Background="#2196F3" Foreground="White" HorizontalAlignment="Center" Margin="10"/>
+                    <Button Content="Cancel" Click="CancelAddButton_Click" Background="Gray" Foreground="White" HorizontalAlignment="Center" Margin="10"/>
+                        </StackPanel>
                 </StackPanel>
             </Border>
         </Popup>
