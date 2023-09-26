@@ -52,6 +52,11 @@ I have integrated FluentValidation into My code to separate validation and busin
 ````
 
 
+### Export
+
+If you're interested in implementing export in Excel, it's recommended to have a separate API that provides a file or Blob from the server. Another useful option would be to have an API that gives you a comprehensive list of all users in one place, without requiring pagination. 
+
+
 
 
 
