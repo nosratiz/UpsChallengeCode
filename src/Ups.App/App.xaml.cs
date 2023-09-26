@@ -1,8 +1,11 @@
-﻿using System.Windows;
+﻿using System.Configuration;
+using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using UPS.Application;
+using UPS.Common.Logger;
 
 namespace Ups.App;
 
@@ -17,18 +20,23 @@ public partial class App : Application
     {
         Config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
-            .AddUserSecrets<App>() 
-            .Build();
+        .AddUserSecrets<App>()
+        .Build();
 
-    
-
+        
 
         AppHost = Host.CreateDefaultBuilder().ConfigureServices(((context, services) =>
         {
             services.AddSingleton<MainWindow>();
             services.AddApplication(Config);
 
-        })).Build();
+        })).UseSerilog()
+        .Build();
+
+
+        AppHost.SeriLogConfig(Config);
+
+
 
 
 
